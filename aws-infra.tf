@@ -18,7 +18,7 @@ output "bucketnames"{
   value =  {
     for i,k in aws_s3_bucket.bucketsv1: i => k.bucket
   }
-  
+ 
 }
 
 
