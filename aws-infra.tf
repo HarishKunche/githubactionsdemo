@@ -1,5 +1,7 @@
 provider "aws" {
-  region = "eu-north-1"
+  region     = "eu-north-1"
+  access_key = "AKIAWZSR6DYB3UJVM3UF"
+  secret_key = "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"
 }
 resource "aws_s3_bucket" "bucketsv1" {
 for_each = {
@@ -18,7 +20,7 @@ output "bucketnames"{
   value =  {
     for i,k in aws_s3_bucket.bucketsv1: i => k.bucket
   }
- 
+  
 }
 
 
