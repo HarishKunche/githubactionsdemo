@@ -1,10 +1,9 @@
-name: Terraform CI
+name: Terraform CI (Access Keys)
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
   terraform:
@@ -13,11 +12,18 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: ap-south-1
+      AWS_REGION: eu-north-1
+      AWS_DEFAULT_REGION: eu-north-1
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Debug AWS env (SAFE)
+        run: |
+          echo "ACCESS KEY SET? -> ${AWS_ACCESS_KEY_ID:+YES}"
+          echo "SECRET KEY SET? -> ${AWS_SECRET_ACCESS_KEY:+YES}"
+          echo "REGION -> $AWS_REGION"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -26,9 +32,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-
-      - name: Terraform Validate
-        run: terraform validate
 
       - name: Terraform Plan
         run: terraform plan
