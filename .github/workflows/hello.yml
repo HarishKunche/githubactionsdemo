@@ -1,0 +1,16 @@
+name: Hello GitHub Actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello
+        run: |
+          echo "Hello, GitHub Actions!"
+          echo "Current directory contents:"
+          mkdir -p tech sys
+          ll -a
